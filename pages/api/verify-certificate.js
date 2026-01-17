@@ -100,19 +100,20 @@ export default async function handler(req, res) {
 
         // Map data to response fields
 // Columns: A=Name, B=Email, C=License No., D=Certificate PDF, E=Password, F=Referrals Subm, G=Password Sent, H=Date Completed        const result = {
-                  participantName: certificate[0] || 'N/A',
-licenseNumber: certificate[2] || 'N/A',                  program: certificate[2] || 'N/A',
-email: certificate[1] || 'N/A',                  dateIssued: certificate[4] || 'N/A',
-certificatePDF: certificate[3] || 'N/A',                  expiryDate: certificate[6] || 'N/A',
-password: certificate[4] || 'N/A',        }
-referralStatus: certificate[5] || 'N/A',        return res.status(200).json(result)
-passwordSent: certificate[6] || 'N/A',          console.error('API error:', error)
-dateCompleted: certificate[7] || 'N/A',        // Provide specific error messages for debugging
-        if (error.message.includes('SyntaxError') || error.message.includes('JSON')) {
-                  return res.status(500).json({
-                              error: 'Invalid credentials format - please check GOOGLE_PRIVATE_KEY environment variable',
-                              details: 'Ensure escaped newlines (\\n) in private key are properly formatted',
-                  })
+
+              const result = {
+                      participantName: certificate[0] || 'N/A',
+                      licenseNumber: certificate[2] || 'N/A',
+                      email: certificate[1] || 'N/A',
+                      certificatePDF: certificate[3] || 'N/A',
+                      password: certificate[4] || 'N/A',
+                      referralStatus: certificate[5] || 'N/A',
+                      passwordSent: certificate[6] || 'N/A',
+                      dateCompleted: certificate[7] || 'N/A',
+              }
+
+      return res.status(200).json(result)
+
         }
 
         if (error.message.includes('credentials')) {
